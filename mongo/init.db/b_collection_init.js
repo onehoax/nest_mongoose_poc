@@ -4,10 +4,14 @@
 ===============================================================
 */
 
+// ==================== Permissions ========================
+
+db.createCollection("permissions");
+
 // ======================= Roles ===========================
 
-db.createCollection('roles');
+db.createCollection("roles");
 
 // ======================= Users ===========================
 
-db.createCollection('users');
+db.createCollection("users");

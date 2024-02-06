@@ -42,9 +42,4 @@ export class UserMongoRepository
       .exec()
       .then((result: UpdateWriteOpResult): number => result.modifiedCount);
   }
-
-  // TODO - mv to mongo repo
-  public async getCount(filter: {}): Promise<number> {
-    return await this.userModel.countDocuments(filter).exec();
-  }
 }

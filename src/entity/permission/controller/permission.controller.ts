@@ -42,7 +42,6 @@ export class PermissionController {
   @GeneralResponseDocumentation(
     "Create/Delete available permissions based on the endpoints available in the system",
   )
-  @Public()
   public refresh(): Promise<HttpResponse<ICountResponse>> {
     return this.permissionRefreshService.run();
   }

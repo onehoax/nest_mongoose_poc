@@ -4,48 +4,62 @@
 ===============================================================
 */
 
+// ==================== Permissions ========================
+
+db.permissions.insertMany([
+  {
+    module: "user",
+    path: "/api/user",
+    method: "post",
+    description: "create users",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    module: "user",
+    path: "/api/user",
+    method: "get",
+    description: "view users",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+]);
+
 // ======================= Roles ===========================
+
+const createUsersPermission = db.permissions.findOne({
+  $and: [{ module: "user" }, { method: "post" }],
+});
+const viewUsersPermission = db.permissions.findOne({
+  $and: [{ module: "user" }, { method: "get" }],
+});
 
 db.roles.insertMany([
   {
-    codeName: 'admin',
-    uiName: 'Administrador',
+    slug: "admin",
+    name: "Admin",
+    permissions: [
+      {
+        $ref: "permissions",
+        $id: createUsersPermission._id,
+      },
+      {
+        $ref: "permissions",
+        $id: viewUsersPermission._id,
+      },
+    ],
     createdAt: new Date(),
     updatedAt: new Date(),
   },
   {
-    codeName: 'trainer',
-    uiName: 'Entrenador',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    codeName: 'sports_professional',
-    uiName: 'Profesional del Deporte',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    codeName: 'physio',
-    uiName: 'Fisioterapeuta',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    codeName: 'client',
-    uiName: 'Cliente',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    codeName: 'injured',
-    uiName: 'Lesionado',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    codeName: 'athlete',
-    uiName: 'Deportista',
+    slug: "test",
+    name: "Test",
+    permissions: [
+      {
+        $ref: "permissions",
+        $id: viewUsersPermission._id,
+      },
+    ],
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -54,38 +68,27 @@ db.roles.insertMany([
 // ======================= Users ===========================
 
 const adminRole = db.roles.findOne({
-  codeName: 'admin',
+  slug: "admin",
 });
-const trainerRole = db.roles.findOne({
-  codeName: 'trainer',
+const testRole = db.roles.findOne({
+  slug: "test",
 });
 
 db.users.insertMany([
   {
-    givenNames: 'andres',
-    lastNames: 'osorio',
-    governmentId: '12345',
-    email: 'andres@email.com',
-    cellPhoneNumber: '123-345-6789',
-    dob: new Date('1876-11-01'),
-    roles: {
-      $ref: 'roles',
-      $id: [adminRole._id, trainerRole._id],
+    fullName: "Super User",
+    userName: "super",
+    email: "super@email.com",
+    password: "",
+    status: "1",
+    language: "en",
+    role: {
+      $ref: "roles",
+      $id: adminRole._id,
     },
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    givenNames: 'mauro',
-    lastNames: 'solano',
-    governmentId: '812343',
-    email: 'mauro@email.com',
-    cellPhoneNumber: '123-345-6789',
-    dob: new Date('1989-05-11'),
-    roles: {
-      $ref: 'roles',
-      $id: [adminRole._id],
-    },
+    isSuperUser: true,
+    refreshToken: "",
+    lastLogin: null,
     createdAt: new Date(),
     updatedAt: new Date(),
   },
