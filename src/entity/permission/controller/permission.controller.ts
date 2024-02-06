@@ -1,0 +1,92 @@
+import { PermissionCreateDto } from "@app/entity/permission/dto/permission-create.dto";
+import { PermissionUpdateDto } from "@app/entity/permission/dto/permission-update.dto";
+import { IPermission } from "@app/entity/permission/interface/permission.interface";
+import { PermissionService } from "@app/entity/permission/service/permission.service";
+import {
+  GenericCreateDocumentation,
+  GenericDeleteDocumentation,
+  GenericFindAllDocumentation,
+  GenericFindByIdDocumentation,
+  GenericUpdateDocumentation,
+} from "@app/shared/doc/generic.doc";
+import { EntityEnum } from "@app/shared/entity/enum/entity.enum";
+import { ICountResponse } from "@app/shared/response/interface/count-response.interface";
+import { HttpResponse } from "@app/shared/response/model/http-response.model";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseArrayPipe,
+  Patch,
+  Post,
+} from "@nestjs/common";
+import { ApiBearerAuth, ApiBody, ApiTags } from "@nestjs/swagger";
+
+const controllerName: string = "permission";
+
+@ApiTags(controllerName)
+@Controller(controllerName)
+@ApiBearerAuth()
+export class PermissionController {
+  public constructor(
+    private readonly permissionGeneralService: PermissionService,
+  ) {}
+
+  @Get("/:path/:method")
+  @GenericFindAllDocumentation(EntityEnum.PERMISSION)
+  public findByPathAndMethod(
+    @Param("path") path: string,
+    @Param("method") method: string,
+  ): Promise<HttpResponse<IPermission>> {
+    return this.permissionGeneralService.findByPathAndMethod(path, method);
+  }
+
+  @Get("/:ids")
+  @GenericFindByIdDocumentation(EntityEnum.PERMISSION)
+  public findManyById(
+    @Param("ids", ParseArrayPipe) ids: string[],
+  ): Promise<HttpResponse<IPermission[]>> {
+    return this.permissionGeneralService.findMany(ids);
+  }
+
+  @Get()
+  @GenericFindAllDocumentation(EntityEnum.PERMISSION)
+  public findAll(): Promise<HttpResponse<IPermission[]>> {
+    return this.permissionGeneralService.findAll();
+  }
+
+  @Post()
+  @GenericCreateDocumentation(EntityEnum.PERMISSION)
+  @ApiBody({
+    type: [PermissionCreateDto],
+    required: true,
+  })
+  public createMany(
+    @Body() permissionCreateDtos: PermissionCreateDto[],
+  ): Promise<HttpResponse<IPermission[]>> {
+    return this.permissionGeneralService.createMany(permissionCreateDtos);
+  }
+
+  @Patch("/:id")
+  @GenericUpdateDocumentation(EntityEnum.PERMISSION)
+  @ApiBody({
+    type: PermissionUpdateDto,
+    required: true,
+  })
+  public update(
+    @Param("id") id: string,
+    @Body() permissionUpdateDto: PermissionUpdateDto,
+  ): Promise<HttpResponse<ICountResponse>> {
+    return this.permissionGeneralService.update(id, permissionUpdateDto);
+  }
+
+  @Delete("/:ids")
+  @GenericDeleteDocumentation(EntityEnum.PERMISSION)
+  public delete(
+    @Param("ids", ParseArrayPipe) ids: string[],
+  ): Promise<HttpResponse<ICountResponse>> {
+    return this.permissionGeneralService.deleteMany(ids);
+  }
+}
