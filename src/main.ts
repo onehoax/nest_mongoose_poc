@@ -1,5 +1,5 @@
 import { AppModule } from "@app/app/app.module";
-import { EnvironmentEnum } from "@app/shared/enum/environment.enum";
+import { Environment } from "@app/shared/enum/environment.enum";
 import { Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
@@ -14,17 +14,18 @@ async function bootstrap() {
   const configService: ConfigService = app.get(ConfigService);
   const appName: string = configService.get<string>("APP_NAME");
   const port: number = configService.get<number>("PORT") ?? 3001;
-  const env: EnvironmentEnum =
-    configService.get<EnvironmentEnum>("NODE_ENV") ?? EnvironmentEnum.DEV;
+  const env: Environment =
+    configService.get<Environment>("NODE_ENV") ?? Environment.DEV;
 
   const config = new DocumentBuilder()
     .setTitle(appName)
     .setDescription(`${appName} App Documentation`)
     .setVersion("0.1")
+    .addBearerAuth()
     .build();
 
   const document: OpenAPIObject = SwaggerModule.createDocument(app, config);
-  if (env !== EnvironmentEnum.PROD) {
+  if (env !== Environment.PROD) {
     const swaggerPrefix: string = "docs";
     SwaggerModule.setup(swaggerPrefix, app, document);
     Logger.debug(

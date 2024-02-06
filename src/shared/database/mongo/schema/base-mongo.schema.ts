@@ -1,3 +1,3 @@
-export class BaseMongo {
+export class Base {
   public readonly id!: string;
 }

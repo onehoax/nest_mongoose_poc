@@ -1,8 +1,11 @@
 import { PermissionCreateDto } from "@app/entity/permission/dto/permission-create.dto";
 import { PermissionUpdateDto } from "@app/entity/permission/dto/permission-update.dto";
 import { IPermission } from "@app/entity/permission/interface/permission.interface";
-import { PermissionService } from "@app/entity/permission/service/permission.service";
+import { PermissionGeneralService } from "@app/entity/permission/service/permission-general.service";
+import { PermissionRefreshService } from "@app/entity/permission/service/permission-refresh.service";
+import { Public } from "@app/shared/decorators/public.decorator";
 import {
+  GeneralResponseDocumentation,
   GenericCreateDocumentation,
   GenericDeleteDocumentation,
   GenericFindAllDocumentation,
@@ -31,8 +34,18 @@ const controllerName: string = "permission";
 @ApiBearerAuth()
 export class PermissionController {
   public constructor(
-    private readonly permissionGeneralService: PermissionService,
+    private readonly permissionGeneralService: PermissionGeneralService,
+    private readonly permissionRefreshService: PermissionRefreshService,
   ) {}
+
+  @Get("/refresh")
+  @GeneralResponseDocumentation(
+    "Create/Delete available permissions based on the endpoints available in the system",
+  )
+  @Public()
+  public refresh(): Promise<HttpResponse<ICountResponse>> {
+    return this.permissionRefreshService.run();
+  }
 
   @Get("/:path/:method")
   @GenericFindAllDocumentation(EntityEnum.PERMISSION)

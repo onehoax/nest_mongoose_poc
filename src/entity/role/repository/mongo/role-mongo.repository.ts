@@ -1,6 +1,6 @@
 import { IRole } from "@app/entity/role/interface/role.interface";
 import { IRoleRepository } from "@app/entity/role/interface/role.repository.interface";
-import { RoleMongo } from "@app/entity/role/repository/mongo/role-mongo.schema";
+import { Role } from "@app/entity/role/repository/mongo/role-mongo.schema";
 import { MongoRepository } from "@app/shared/database/mongo/repository/mongo.repository";
 import { defaultFilter } from "@app/shared/database/mongo/utils/mongo.utils";
 import { InjectModel } from "@nestjs/mongoose";
@@ -11,7 +11,7 @@ export class RoleMongoRepository
   implements IRoleRepository
 {
   public constructor(
-    @InjectModel(RoleMongo.name) private readonly roleModel: Model<RoleMongo>,
+    @InjectModel(Role.name) private readonly roleModel: Model<Role>,
   ) {
     super(roleModel);
   }

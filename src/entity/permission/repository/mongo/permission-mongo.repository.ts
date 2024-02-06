@@ -1,6 +1,6 @@
 import { IPermission } from "@app/entity/permission/interface/permission.interface";
 import { IPermissionRepository } from "@app/entity/permission/interface/permission.repository.interface";
-import { PermissionMongo } from "@app/entity/permission/repository/mongo/permission-mongo.schema";
+import { Permission } from "@app/entity/permission/repository/mongo/permission-mongo.schema";
 import { MongoRepository } from "@app/shared/database/mongo/repository/mongo.repository";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
@@ -10,8 +10,8 @@ export class PermissionMongoRepository
   implements IPermissionRepository
 {
   public constructor(
-    @InjectModel(PermissionMongo.name)
-    private readonly permissionModel: Model<PermissionMongo>,
+    @InjectModel(Permission.name)
+    private readonly permissionModel: Model<Permission>,
   ) {
     super(permissionModel);
   }

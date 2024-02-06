@@ -1,5 +1,5 @@
 import { IPermission } from "@app/entity/permission/interface/permission.interface";
-import { BaseMongo } from "@app/shared/database/mongo/schema/base-mongo.schema";
+import { Base } from "@app/shared/database/mongo/schema/base-mongo.schema";
 import { ModelDefinition, Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import mongoose from "mongoose";
 
@@ -17,7 +17,7 @@ const { Types } = mongoose.Schema;
     },
   },
 })
-export class PermissionMongo extends BaseMongo implements IPermission {
+export class Permission extends Base implements IPermission {
   @Prop({ type: Types.String, required: true })
   public readonly module!: string;
 
@@ -31,10 +31,9 @@ export class PermissionMongo extends BaseMongo implements IPermission {
   public readonly description!: string;
 }
 
-export const PermissionMongoSchema =
-  SchemaFactory.createForClass(PermissionMongo);
+export const PermissionSchema = SchemaFactory.createForClass(Permission);
 
-export const PermissionMongoModel: ModelDefinition = {
-  name: PermissionMongo.name,
-  schema: PermissionMongoSchema,
+export const PermissionModel: ModelDefinition = {
+  name: Permission.name,
+  schema: PermissionSchema,
 };

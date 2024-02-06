@@ -17,7 +17,7 @@ import {
 } from "@nestjs/common";
 
 @Injectable()
-export class PermissionService {
+export class PermissionGeneralService {
   public constructor(
     @Inject(PERMISSION_REPOSITORY)
     private readonly permissionRepository: IPermissionRepository,
