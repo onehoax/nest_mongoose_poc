@@ -2,11 +2,19 @@ import { IPermission } from "@app/entity/permission/interface/permission.interfa
 
 export interface IPermissionRepository {
   findOne: (id: string) => Promise<IPermission | null>;
-  findMany: (ids: string[], isDeleted?: boolean) => Promise<IPermission[]>;
+  findMany: (ids: string[]) => Promise<IPermission[]>;
   findAll: () => Promise<IPermission[]>;
-  findByPathAndMethod: (path: string, method: string) => Promise<IPermission | null>;
-  createMany: (permissionCreateDtos: Partial<IPermission>[]) => Promise<IPermission[]>;
-  update: (id: string, permissionUpdateDto: Partial<IPermission>) => Promise<number>;
+  findByPathAndMethod: (
+    path: string,
+    method: string,
+  ) => Promise<IPermission | null>;
+  createMany: (
+    permissionCreateDtos: Partial<IPermission>[],
+  ) => Promise<IPermission[]>;
+  update: (
+    id: string,
+    permissionUpdateDto: Partial<IPermission>,
+  ) => Promise<number>;
   deleteMany: (ids: string[]) => Promise<number>;
 }
 

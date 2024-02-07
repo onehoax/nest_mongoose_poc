@@ -38,28 +38,14 @@ db.roles.insertMany([
   {
     slug: "admin",
     name: "Admin",
-    permissions: [
-      {
-        $ref: "permissions",
-        $id: createUsersPermission._id,
-      },
-      {
-        $ref: "permissions",
-        $id: viewUsersPermission._id,
-      },
-    ],
+    permissions: [createUsersPermission._id, viewUsersPermission._id],
     createdAt: new Date(),
     updatedAt: new Date(),
   },
   {
     slug: "test",
     name: "Test",
-    permissions: [
-      {
-        $ref: "permissions",
-        $id: viewUsersPermission._id,
-      },
-    ],
+    permissions: [viewUsersPermission._id],
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -82,10 +68,7 @@ db.users.insertMany([
     password: "",
     status: "1",
     language: "en",
-    role: {
-      $ref: "roles",
-      $id: adminRole._id,
-    },
+    role: adminRole._id,
     isSuperUser: true,
     refreshToken: "",
     lastLogin: null,

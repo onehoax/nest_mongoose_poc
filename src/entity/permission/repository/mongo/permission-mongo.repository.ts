@@ -22,7 +22,7 @@ export class PermissionMongoRepository
   ): Promise<IPermission | null> {
     return await this.permissionModel
       .findOne({
-        $and: [{ path: path }, { method: method }, { isDeleted: false }],
+        $and: [{ path: path }, { method: method }],
       })
       .exec();
   }

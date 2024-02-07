@@ -3,7 +3,6 @@ import { PermissionUpdateDto } from "@app/entity/permission/dto/permission-updat
 import { IPermission } from "@app/entity/permission/interface/permission.interface";
 import { PermissionGeneralService } from "@app/entity/permission/service/permission-general.service";
 import { PermissionRefreshService } from "@app/entity/permission/service/permission-refresh.service";
-import { Public } from "@app/shared/decorators/public.decorator";
 import {
   GeneralResponseDocumentation,
   GenericCreateDocumentation,

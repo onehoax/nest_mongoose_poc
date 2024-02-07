@@ -18,9 +18,9 @@ const controllerName: string = "auth";
 export class AuthController {
   public constructor(private readonly authInService: AuthService) {}
 
+  @Public()
   @Post("sign-in")
   @GeneralResponseDocumentation("Sign in")
-  @Public()
   public signIn(
     @Body() signInDto: AuthDto,
     @Req() req: Request,
@@ -33,7 +33,9 @@ export class AuthController {
   @ApiBearerAuth()
   @TokenRefresh()
   @UseGuards(RefreshTokenGuard)
-  public refreshTokens(@Req() req: Request): Promise<HttpResponse<IAuthResponse>> {
+  public refreshTokens(
+    @Req() req: Request,
+  ): Promise<HttpResponse<IAuthResponse>> {
     return this.authInService.refreshToken(req);
   }
 

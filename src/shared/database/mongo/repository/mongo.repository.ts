@@ -1,19 +1,18 @@
-import { defaultFilter, getIsDeleted } from "@app/shared/database/mongo/utils/mongo.utils";
 import { Model, UpdateWriteOpResult } from "mongoose";
 
 export abstract class MongoRepository<I> {
   public constructor(private readonly model: Model<I>) {}
 
   public async findOne(id: string): Promise<I | null> {
-    return await this.model.findOne({ $and: [{ _id: id }, defaultFilter] }).exec();
+    return await this.model.findOne({ _id: id }).exec();
   }
 
   public async findMany(ids: string[]): Promise<I[]> {
-    return await this.model.find({ $and: [{ _id: { $in: ids } }, defaultFilter] }).exec();
+    return await this.model.find({ _id: { $in: ids } }).exec();
   }
 
   public async findAll(): Promise<I[]> {
-    return await this.model.find(defaultFilter).exec();
+    return await this.model.find().exec();
   }
 
   public async create(createDto: Partial<I>): Promise<I> {
@@ -33,15 +32,15 @@ export abstract class MongoRepository<I> {
 
   public async delete(id: string): Promise<number> {
     return await this.model
-      .updateOne({ _id: id }, { $set: getIsDeleted(true) })
+      .deleteOne({ _id: id })
       .exec()
-      .then((result: UpdateWriteOpResult): number => result.modifiedCount);
+      .then((result): number => result.deletedCount);
   }
 
   public async deleteMany(ids: string[]): Promise<number> {
     return await this.model
-      .updateMany({ _id: { $in: ids } }, { $set: getIsDeleted(true) })
+      .deleteMany({ _id: { $in: ids } })
       .exec()
-      .then((result: UpdateWriteOpResult): number => result.modifiedCount);
+      .then((result): number => result.deletedCount);
   }
 }

@@ -12,7 +12,15 @@ import {
 import { EntityEnum } from "@app/shared/entity/enum/entity.enum";
 import { ICountResponse } from "@app/shared/response/interface/count-response.interface";
 import { HttpResponse } from "@app/shared/response/model/http-response.model";
-import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from "@nestjs/common";
 import { ApiBearerAuth, ApiBody, ApiTags } from "@nestjs/swagger";
 
 const controllerName: string = "user";
@@ -25,7 +33,9 @@ export class UserController {
 
   @Get("/:id")
   @GenericFindByIdDocumentation(EntityEnum.USER)
-  public findOne(@Param("id") id: string): Promise<HttpResponse<IUserResponse>> {
+  public findOne(
+    @Param("id") id: string,
+  ): Promise<HttpResponse<IUserResponse>> {
     return this.userService.findOne(id);
   }
 
@@ -41,7 +51,9 @@ export class UserController {
     type: UserCreateDto,
     required: true,
   })
-  public create(@Body() userCreateDto: UserCreateDto): Promise<HttpResponse<IUserResponse>> {
+  public create(
+    @Body() userCreateDto: UserCreateDto,
+  ): Promise<HttpResponse<IUserResponse>> {
     return this.userService.create(userCreateDto);
   }
 
@@ -60,7 +72,9 @@ export class UserController {
 
   @Delete("/:id")
   @GenericDeleteDocumentation(EntityEnum.USER)
-  public delete(@Param("id") id: string): Promise<HttpResponse<ICountResponse>> {
+  public delete(
+    @Param("id") id: string,
+  ): Promise<HttpResponse<ICountResponse>> {
     return this.userService.delete(id);
   }
 }

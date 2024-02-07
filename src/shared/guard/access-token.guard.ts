@@ -37,8 +37,10 @@ export class AccessTokenGuard implements CanActivate {
       [context.getHandler(), context.getClass()],
     );
 
-    Logger.debug(publicMessage);
-    if (isTokenRefresh) return true;
+    if (isTokenRefresh) {
+      Logger.debug("Refresh token endpoint");
+      return true;
+    }
 
     const req = context.switchToHttp().getRequest();
     const accessToken: string | undefined = req

@@ -21,10 +21,7 @@ export class UserMongoRepository
   ): Promise<IUser | null> {
     return await this.userModel
       .findOne({
-        $and: [
-          { $or: [{ userName: userName }, { email: email }] },
-          { isDeleted: false },
-        ],
+        $or: [{ userName: userName }, { email: email }],
       })
       .exec();
   }
