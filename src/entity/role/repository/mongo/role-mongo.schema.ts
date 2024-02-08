@@ -35,9 +35,9 @@ export class Role extends Base implements IRole {
   public readonly permissions!: Permission[];
 }
 
-export const RoleSchema = SchemaFactory.createForClass(Role).plugin(
-  require(MongoPluginEnum.AUTO_POPULATE),
-);
+export const RoleSchema = SchemaFactory.createForClass(Role)
+  .index({ slug: 1, name: 1 }, { unique: true })
+  .plugin(require(MongoPluginEnum.AUTO_POPULATE));
 
 export const RoleModel: ModelDefinition = {
   name: Role.name,

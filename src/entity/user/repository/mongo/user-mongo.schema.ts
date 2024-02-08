@@ -61,9 +61,9 @@ export class User extends Base implements IUser {
   public readonly lastLogin?: Date;
 }
 
-export const UserSchema = SchemaFactory.createForClass(User).plugin(
-  require(MongoPluginEnum.AUTO_POPULATE),
-);
+export const UserSchema = SchemaFactory.createForClass(User)
+  .index({ email: 1 }, { unique: true })
+  .plugin(require(MongoPluginEnum.AUTO_POPULATE));
 
 export const UserModel: ModelDefinition = {
   name: User.name,

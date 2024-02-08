@@ -65,7 +65,7 @@ db.users.insertMany([
     fullName: "Super User",
     userName: "super",
     email: "super@email.com",
-    password: "",
+    password: "$2b$10$xnruAmWKJtvUuNm9dDVRS.YJFB62DqKoQetjDtFxSXB7CQCY0Trxq",
     status: "1",
     language: "en",
     role: adminRole._id,

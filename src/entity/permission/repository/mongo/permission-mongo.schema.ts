@@ -31,7 +31,10 @@ export class Permission extends Base implements IPermission {
   public readonly description!: string;
 }
 
-export const PermissionSchema = SchemaFactory.createForClass(Permission);
+export const PermissionSchema = SchemaFactory.createForClass(Permission).index(
+  { module: 1, method: 1 },
+  { unique: true },
+);
 
 export const PermissionModel: ModelDefinition = {
   name: Permission.name,
