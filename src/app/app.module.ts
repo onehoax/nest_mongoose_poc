@@ -1,3 +1,4 @@
+import { CoreUserModule } from "@app/entity/core-user/core-user.module";
 import { LoginLogModule } from "@app/entity/login-log/login-log.module";
 import { PermissionModule } from "@app/entity/permission/permission.module";
 import { RoleModule } from "@app/entity/role/role.module";
@@ -37,6 +38,7 @@ import { MongooseModule } from "@nestjs/mongoose";
     RoleModule,
     RoleModule,
     UserModule,
+    CoreUserModule,
   ],
   providers: [
     {
