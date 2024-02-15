@@ -1,5 +1,5 @@
-import { IUserTestResponse } from "@app/entity/user-test/interface/user-response.interface";
-import { IUserTest } from "@app/entity/user-test/interface/user.interface";
+import { IUserTestResponse } from "@app/entity/user-test/interface/user-test-response.interface";
+import { IUserTest } from "@app/entity/user-test/interface/user-test.interface";
 
 export interface IUserTestRepository {
   findOne: (id: string) => Promise<IUserTest | null>;

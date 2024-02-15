@@ -1,10 +1,10 @@
-import { UserTestCreateDto } from "@app/entity/user-test/dto/user-create.dto";
-import { UserTestUpdateDto } from "@app/entity/user-test/dto/user-update.dto";
-import { IUserTestResponse } from "@app/entity/user-test/interface/user-response.interface";
+import { UserTestCreateDto } from "@app/entity/user-test/dto/user-test-create.dto";
+import { UserTestUpdateDto } from "@app/entity/user-test/dto/user-test-update.dto";
+import { IUserTestResponse } from "@app/entity/user-test/interface/user-test-response.interface";
 import {
   IUserTestRepository,
   USER_TEST_REPOSITORY,
-} from "@app/entity/user-test/interface/user.repository.interface";
+} from "@app/entity/user-test/interface/user-test.repository.interface";
 import { BcryptService } from "@app/shared/bcrypt/service/bcrypt.service";
 import { common, entity } from "@app/shared/constant/response-message.constant";
 import { ResponseActionEnum } from "@app/shared/response/enum/response-action.enum";

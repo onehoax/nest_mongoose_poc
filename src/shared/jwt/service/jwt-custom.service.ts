@@ -15,10 +15,10 @@ import { auth } from "@app/shared/constant/response-message.constant";
 import {
   IUserTestRepository,
   USER_TEST_REPOSITORY,
-} from "@app/entity/user-test/interface/user.repository.interface";
+} from "@app/entity/user-test/interface/user-test.repository.interface";
 import { BcryptService } from "@app/shared/bcrypt/service/bcrypt.service";
 import { reverseToken } from "@app/shared/jwt/jwt-custom.util";
-import { IUserTest } from "@app/entity/user-test/interface/user.interface";
+import { IUserTest } from "@app/entity/user-test/interface/user-test.interface";
 import { EnvironmentVars } from "@app/shared/enum/environment-vars.enum";
 
 @Injectable()

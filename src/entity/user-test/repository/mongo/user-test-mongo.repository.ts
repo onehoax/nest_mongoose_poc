@@ -1,6 +1,6 @@
-import { IUserTest } from "@app/entity/user-test/interface/user.interface";
-import { IUserTestRepository } from "@app/entity/user-test/interface/user.repository.interface";
-import { UserTest } from "@app/entity/user-test/repository/mongo/user-mongo.schema";
+import { IUserTest } from "@app/entity/user-test/interface/user-test.interface";
+import { IUserTestRepository } from "@app/entity/user-test/interface/user-test.repository.interface";
+import { UserTest } from "@app/entity/user-test/repository/mongo/user-test-mongo.schema";
 import { MongoRepository } from "@app/shared/database/mongo/repository/mongo.repository";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model, UpdateWriteOpResult } from "mongoose";

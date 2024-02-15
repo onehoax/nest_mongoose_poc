@@ -1,4 +1,4 @@
-import { IUserTestResponse } from "@app/entity/user-test/interface/user-response.interface";
+import { IUserTestResponse } from "@app/entity/user-test/interface/user-test-response.interface";
 import { IJwtTokens } from "@app/shared/jwt/interface/jwt-tokens.interface";
 
 export interface IAuthResponse {

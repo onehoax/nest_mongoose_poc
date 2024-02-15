@@ -1,7 +1,7 @@
-import { UserTestCreateDto } from "@app/entity/user-test/dto/user-create.dto";
-import { UserTestUpdateDto } from "@app/entity/user-test/dto/user-update.dto";
-import { IUserTestResponse } from "@app/entity/user-test/interface/user-response.interface";
-import { UserTestService } from "@app/entity/user-test/service/user.service";
+import { UserTestCreateDto } from "@app/entity/user-test/dto/user-test-create.dto";
+import { UserTestUpdateDto } from "@app/entity/user-test/dto/user-test-update.dto";
+import { IUserTestResponse } from "@app/entity/user-test/interface/user-test-response.interface";
+import { UserTestService } from "@app/entity/user-test/service/user-test.service";
 import {
   GenericCreateDocumentation,
   GenericDeleteDocumentation,

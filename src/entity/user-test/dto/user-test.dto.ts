@@ -1,6 +1,6 @@
 import { IRole } from "@app/entity/role/interface/role.interface";
-import { UserTestStatusEnum } from "@app/entity/user-test/enum/user-status.enum";
-import { IUserTest } from "@app/entity/user-test/interface/user.interface";
+import { UserTestStatusEnum } from "@app/entity/user-test/enum/user-test-status.enum";
+import { IUserTest } from "@app/entity/user-test/interface/user-test.interface";
 import {
   EMAIL_REGEX,
   USERNAME_REGEX,

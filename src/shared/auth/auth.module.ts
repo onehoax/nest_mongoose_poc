@@ -1,5 +1,5 @@
 import { LoginLogModule } from "@app/entity/login-log/login-log.module";
-import { UserTestModule } from "@app/entity/user-test/user.module";
+import { UserTestModule } from "@app/entity/user-test/user-test.module";
 import { AuthController } from "@app/shared/auth/controller/auth.controller";
 import { AuthService } from "@app/shared/auth/service/auth.service";
 import { BcryptModule } from "@app/shared/bcrypt/bcrypt.module";

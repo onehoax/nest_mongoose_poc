@@ -1,4 +1,4 @@
-import { UserTestDto } from "@app/entity/user-test/dto/user.dto";
+import { UserTestDto } from "@app/entity/user-test/dto/user-test.dto";
 import { PickType } from "@nestjs/swagger";
 
 export class AuthDto extends PickType(UserTestDto, [

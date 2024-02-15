@@ -1,4 +1,4 @@
-import { UserTestDto } from "@app/entity/user-test/dto/user.dto";
+import { UserTestDto } from "@app/entity/user-test/dto/user-test.dto";
 import { OmitType } from "@nestjs/swagger";
 
 export class UserTestCreateDto extends OmitType(UserTestDto, [

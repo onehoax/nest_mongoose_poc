@@ -1,8 +1,8 @@
-import { IUserTest } from "@app/entity/user-test/interface/user.interface";
+import { IUserTest } from "@app/entity/user-test/interface/user-test.interface";
 import {
   IUserTestRepository,
   USER_TEST_REPOSITORY,
-} from "@app/entity/user-test/interface/user.repository.interface";
+} from "@app/entity/user-test/interface/user-test.repository.interface";
 import { IAuth } from "@app/shared/auth/interface/auth.interface";
 import { BcryptService } from "@app/shared/bcrypt/service/bcrypt.service";
 import {

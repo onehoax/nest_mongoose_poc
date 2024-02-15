@@ -1,4 +1,4 @@
-import { IUserTest } from "@app/entity/user-test/interface/user.interface";
+import { IUserTest } from "@app/entity/user-test/interface/user-test.interface";
 import { auth } from "@app/shared/constant/response-message.constant";
 import { IJwtPayload } from "@app/shared/jwt/interface/jwt-payload.interface";
 import { JwtCustomService } from "@app/shared/jwt/service/jwt-custom.service";

@@ -1,4 +1,4 @@
-import { UserTestModule } from "@app/entity/user-test/user.module";
+import { UserTestModule } from "@app/entity/user-test/user-test.module";
 import { BcryptModule } from "@app/shared/bcrypt/bcrypt.module";
 import { JwtCustomService } from "@app/shared/jwt/service/jwt-custom.service";
 import { Module } from "@nestjs/common";

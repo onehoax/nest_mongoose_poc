@@ -1,8 +1,8 @@
-import { CoreUserModule } from "@app/entity/core-user/core-user.module";
+import { UserModule } from "@app/entity/user/user.module";
 import { LoginLogModule } from "@app/entity/login-log/login-log.module";
 import { PermissionModule } from "@app/entity/permission/permission.module";
 import { RoleModule } from "@app/entity/role/role.module";
-import { UserTestModule } from "@app/entity/user-test/user.module";
+import { UserTestModule } from "@app/entity/user-test/user-test.module";
 import { HealthModule } from "@app/health/health.module";
 import { AuthModule } from "@app/shared/auth/auth.module";
 import { BcryptModule } from "@app/shared/bcrypt/bcrypt.module";
@@ -38,7 +38,7 @@ import { MongooseModule } from "@nestjs/mongoose";
     RoleModule,
     RoleModule,
     UserTestModule,
-    CoreUserModule,
+    UserModule,
   ],
   providers: [
     {

@@ -1,6 +1,6 @@
 import { Role } from "@app/entity/role/repository/mongo/role-mongo.schema";
-import { UserTestStatusEnum } from "@app/entity/user-test/enum/user-status.enum";
-import { IUserTest } from "@app/entity/user-test/interface/user.interface";
+import { UserTestStatusEnum } from "@app/entity/user-test/enum/user-test-status.enum";
+import { IUserTest } from "@app/entity/user-test/interface/user-test.interface";
 import { MongoPluginEnum } from "@app/shared/database/mongo/enum/mongo-plugin.enum";
 import { Base } from "@app/shared/database/mongo/schema/base-mongo.schema";
 import { EntityEnum } from "@app/shared/entity/enum/entity.enum";

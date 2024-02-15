@@ -1,6 +1,6 @@
-import { UserSignupTypeEnum } from "@app/entity/core-user/enum/user-signup-type.enum";
-import { UserTypeEnum } from "@app/entity/core-user/enum/user-type.enum";
-import { IUser } from "@app/entity/core-user/interface/core-user.interface";
+import { UserSignupTypeEnum } from "@app/entity/user/enum/user-signup-type.enum";
+import { UserTypeEnum } from "@app/entity/user/enum/user-type.enum";
+import { IUser } from "@app/entity/user/interface/user.interface";
 import { MongoPluginEnum } from "@app/shared/database/mongo/enum/mongo-plugin.enum";
 import { Base } from "@app/shared/database/mongo/schema/base-mongo.schema";
 import { LanguageEnum } from "@app/shared/enum/language.enum";

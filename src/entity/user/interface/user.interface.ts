@@ -1,5 +1,5 @@
-import { UserSignupTypeEnum } from "@app/entity/core-user/enum/user-signup-type.enum";
-import { UserTypeEnum } from "@app/entity/core-user/enum/user-type.enum";
+import { UserSignupTypeEnum } from "@app/entity/user/enum/user-signup-type.enum";
+import { UserTypeEnum } from "@app/entity/user/enum/user-type.enum";
 import { IBase } from "@app/shared/entity/interface/base.interface";
 import { LanguageEnum } from "@app/shared/enum/language.enum";
 

@@ -1,4 +1,4 @@
-import { IUserTest } from "@app/entity/user-test/interface/user.interface";
+import { IUserTest } from "@app/entity/user-test/interface/user-test.interface";
 import { auth } from "@app/shared/constant/response-message.constant";
 import { IS_PUBLIC_KEY } from "@app/shared/decorators/public.decorator";
 import { IS_TOKEN_REFRESH_KEY } from "@app/shared/decorators/token-refresh.decorator";
