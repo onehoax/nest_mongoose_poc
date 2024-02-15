@@ -1,7 +1,7 @@
-import { UserCreateDto } from "@app/entity/user/dto/user-create.dto";
-import { UserUpdateDto } from "@app/entity/user/dto/user-update.dto";
-import { IUserResponse } from "@app/entity/user/interface/user-response.interface";
-import { UserService } from "@app/entity/user/service/user.service";
+import { UserTestCreateDto } from "@app/entity/user-test/dto/user-create.dto";
+import { UserTestUpdateDto } from "@app/entity/user-test/dto/user-update.dto";
+import { IUserTestResponse } from "@app/entity/user-test/interface/user-response.interface";
+import { UserTestService } from "@app/entity/user-test/service/user.service";
 import {
   GenericCreateDocumentation,
   GenericDeleteDocumentation,
@@ -28,46 +28,46 @@ const controllerName: string = "user";
 @ApiTags(controllerName)
 @Controller(controllerName)
 @ApiBearerAuth()
-export class UserController {
-  public constructor(private readonly userService: UserService) {}
+export class UserTestController {
+  public constructor(private readonly userService: UserTestService) {}
 
   @Get("/:id")
   @GenericFindByIdDocumentation(EntityEnum.USER)
   public findOne(
     @Param("id") id: string,
-  ): Promise<HttpResponse<IUserResponse>> {
+  ): Promise<HttpResponse<IUserTestResponse>> {
     return this.userService.findOne(id);
   }
 
   @Get()
   @GenericFindAllDocumentation(EntityEnum.USER)
-  public findAll(): Promise<HttpResponse<IUserResponse[]>> {
+  public findAll(): Promise<HttpResponse<IUserTestResponse[]>> {
     return this.userService.findAll();
   }
 
   @Post()
   @GenericCreateDocumentation(EntityEnum.USER)
   @ApiBody({
-    type: UserCreateDto,
+    type: UserTestCreateDto,
     required: true,
   })
   public create(
-    @Body() userCreateDto: UserCreateDto,
-  ): Promise<HttpResponse<IUserResponse>> {
-    return this.userService.create(userCreateDto);
+    @Body() UserTestCreateDto: UserTestCreateDto,
+  ): Promise<HttpResponse<IUserTestResponse>> {
+    return this.userService.create(UserTestCreateDto);
   }
 
   @Patch("/:id")
   @GenericUpdateDocumentation(EntityEnum.USER)
   @ApiBody({
-    type: UserUpdateDto,
+    type: UserTestUpdateDto,
     required: true,
   })
   public update(
     @Param("id") id: string,
-    @Body() userUpdateDto: UserUpdateDto,
+    @Body() UserTestUpdateDto: UserTestUpdateDto,
   ): Promise<HttpResponse<ICountResponse>> {
-    return this.userService.update(id, userUpdateDto);
+    return this.userService.update(id, UserTestUpdateDto);
   }
 
   @Delete("/:id")

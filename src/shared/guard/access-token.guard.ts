@@ -1,4 +1,4 @@
-import { IUser } from "@app/entity/user/interface/user.interface";
+import { IUserTest } from "@app/entity/user-test/interface/user.interface";
 import { auth } from "@app/shared/constant/response-message.constant";
 import { IS_PUBLIC_KEY } from "@app/shared/decorators/public.decorator";
 import { IS_TOKEN_REFRESH_KEY } from "@app/shared/decorators/token-refresh.decorator";
@@ -56,10 +56,11 @@ export class AccessTokenGuard implements CanActivate {
     const jwtPayload: IJwtPayload =
       await this.jwtCustomService.verifyAccessToken(accessToken);
 
-    const user: IUser = await this.jwtCustomService.validateAccessTokenPayload(
-      jwtPayload,
-      AccessTokenGuard.name,
-    );
+    const user: IUserTest =
+      await this.jwtCustomService.validateAccessTokenPayload(
+        jwtPayload,
+        AccessTokenGuard.name,
+      );
 
     req.user = user;
 

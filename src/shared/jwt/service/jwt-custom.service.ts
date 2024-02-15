@@ -13,12 +13,12 @@ import { ConfigService } from "@nestjs/config";
 import { JwtService, TokenExpiredError } from "@nestjs/jwt";
 import { auth } from "@app/shared/constant/response-message.constant";
 import {
-  IUserRepository,
-  USER_REPOSITORY,
-} from "@app/entity/user/interface/user.repository.interface";
+  IUserTestRepository,
+  USER_TEST_REPOSITORY,
+} from "@app/entity/user-test/interface/user.repository.interface";
 import { BcryptService } from "@app/shared/bcrypt/service/bcrypt.service";
 import { reverseToken } from "@app/shared/jwt/jwt-custom.util";
-import { IUser } from "@app/entity/user/interface/user.interface";
+import { IUserTest } from "@app/entity/user-test/interface/user.interface";
 import { EnvironmentVars } from "@app/shared/enum/environment-vars.enum";
 
 @Injectable()
@@ -27,7 +27,8 @@ export class JwtCustomService {
     private readonly configService: ConfigService,
     private readonly jwtService: JwtService,
     private readonly bcryptService: BcryptService,
-    @Inject(USER_REPOSITORY) private readonly userRepository: IUserRepository,
+    @Inject(USER_TEST_REPOSITORY)
+    private readonly userRepository: IUserTestRepository,
   ) {}
 
   private async tryTokenVerify(
@@ -89,8 +90,11 @@ export class JwtCustomService {
     };
   }
 
-  public async getUserFromDb(userId: string, context: string): Promise<IUser> {
-    const dbUser: IUser | null = await this.userRepository.findOne(userId);
+  public async getUserFromDb(
+    userId: string,
+    context: string,
+  ): Promise<IUserTest> {
+    const dbUser: IUserTest | null = await this.userRepository.findOne(userId);
 
     if (!dbUser) {
       Logger.error(`No user in db with id: ${userId}`);
@@ -103,8 +107,8 @@ export class JwtCustomService {
   public async validateAccessTokenPayload(
     jwtPayload: IJwtPayload,
     context: string,
-  ): Promise<IUser> {
-    const dbUser: IUser = await this.getUserFromDb(jwtPayload.id, context);
+  ): Promise<IUserTest> {
+    const dbUser: IUserTest = await this.getUserFromDb(jwtPayload.id, context);
 
     const isValid: boolean = jwtPayload.userName === dbUser.userName;
 
@@ -122,8 +126,8 @@ export class JwtCustomService {
     jwtPayload: IJwtPayload,
     refreshToken: string,
     context: string,
-  ): Promise<IUser> {
-    const dbUser: IUser = await this.getUserFromDb(jwtPayload.id, context);
+  ): Promise<IUserTest> {
+    const dbUser: IUserTest = await this.getUserFromDb(jwtPayload.id, context);
 
     if (!dbUser.refreshToken) {
       Logger.error(`No Refresh token for user with id: ${dbUser.id}`);

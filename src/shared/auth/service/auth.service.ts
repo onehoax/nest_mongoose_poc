@@ -1,8 +1,8 @@
-import { IUser } from "@app/entity/user/interface/user.interface";
+import { IUserTest } from "@app/entity/user-test/interface/user.interface";
 import {
-  IUserRepository,
-  USER_REPOSITORY,
-} from "@app/entity/user/interface/user.repository.interface";
+  IUserTestRepository,
+  USER_TEST_REPOSITORY,
+} from "@app/entity/user-test/interface/user.repository.interface";
 import { IAuth } from "@app/shared/auth/interface/auth.interface";
 import { BcryptService } from "@app/shared/bcrypt/service/bcrypt.service";
 import {
@@ -34,7 +34,8 @@ import DeviceDetector = require("device-detector-js");
 @Injectable()
 export class AuthService {
   public constructor(
-    @Inject(USER_REPOSITORY) private readonly userRepository: IUserRepository,
+    @Inject(USER_TEST_REPOSITORY)
+    private readonly userRepository: IUserTestRepository,
     @Inject(LOGIN_LOG_REPOSITORY)
     private readonly loginLogRepository: ILoginLogRepository,
     private readonly bcryptService: BcryptService,
@@ -82,7 +83,7 @@ export class AuthService {
     body: IAuth,
     req: Request,
   ): Promise<HttpResponse<IAuthResponse>> {
-    const dbUser: IUser | null =
+    const dbUser: IUserTest | null =
       await this.userRepository.findByUsernameOrEmail(body.userName);
     if (!dbUser) {
       Logger.error(`Invalid user name: ${body.userName}`);
@@ -119,7 +120,7 @@ export class AuthService {
   }
 
   public async refreshToken(req): Promise<HttpResponse<IAuthResponse>> {
-    const dbUser: IUser = <IUser>req;
+    const dbUser: IUserTest = <IUserTest>req;
 
     const tokens: IJwtTokens = await this.getNewTokens(
       dbUser.id,
@@ -139,7 +140,7 @@ export class AuthService {
   }
 
   public async logOut(req): Promise<HttpResponse<ICountResponse>> {
-    const dbUser: IUser = <IUser>req.user;
+    const dbUser: IUserTest = <IUserTest>req.user;
 
     const userId: string = dbUser.id;
     const updatedCount: number = await this.userRepository.updateRefreshToken(

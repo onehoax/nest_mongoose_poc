@@ -1,10 +1,10 @@
-import { UserCreateDto } from "@app/entity/user/dto/user-create.dto";
-import { UserUpdateDto } from "@app/entity/user/dto/user-update.dto";
-import { IUserResponse } from "@app/entity/user/interface/user-response.interface";
+import { UserTestCreateDto } from "@app/entity/user-test/dto/user-create.dto";
+import { UserTestUpdateDto } from "@app/entity/user-test/dto/user-update.dto";
+import { IUserTestResponse } from "@app/entity/user-test/interface/user-response.interface";
 import {
-  IUserRepository,
-  USER_REPOSITORY,
-} from "@app/entity/user/interface/user.repository.interface";
+  IUserTestRepository,
+  USER_TEST_REPOSITORY,
+} from "@app/entity/user-test/interface/user.repository.interface";
 import { BcryptService } from "@app/shared/bcrypt/service/bcrypt.service";
 import { common, entity } from "@app/shared/constant/response-message.constant";
 import { ResponseActionEnum } from "@app/shared/response/enum/response-action.enum";
@@ -19,28 +19,30 @@ import {
 } from "@nestjs/common";
 
 @Injectable()
-export class UserService {
+export class UserTestService {
   public constructor(
-    @Inject(USER_REPOSITORY) private readonly userRepository: IUserRepository,
+    @Inject(USER_TEST_REPOSITORY)
+    private readonly userRepository: IUserTestRepository,
     private readonly bcryptService: BcryptService,
   ) {}
 
-  public async findOne(id: string): Promise<HttpResponse<IUserResponse>> {
-    const user: IUserResponse | null = await this.userRepository.findOne(id);
+  public async findOne(id: string): Promise<HttpResponse<IUserTestResponse>> {
+    const user: IUserTestResponse | null =
+      await this.userRepository.findOne(id);
 
     if (!user) throw new NotFoundException(entity.notExists);
 
-    return new HttpResponse<IUserResponse>({
+    return new HttpResponse<IUserTestResponse>({
       data: user,
       success: true,
       message: common.success,
     });
   }
 
-  public async findAll(): Promise<HttpResponse<IUserResponse[]>> {
-    const users: IUserResponse[] = await this.userRepository.findAll();
+  public async findAll(): Promise<HttpResponse<IUserTestResponse[]>> {
+    const users: IUserTestResponse[] = await this.userRepository.findAll();
 
-    return new HttpResponse<IUserResponse[]>({
+    return new HttpResponse<IUserTestResponse[]>({
       data: users,
       success: true,
       message: common.success,
@@ -48,23 +50,24 @@ export class UserService {
   }
 
   public async create(
-    userCreateDto: UserCreateDto,
-  ): Promise<HttpResponse<IUserResponse>> {
-    const exists: IUserResponse | null =
+    UserTestCreateDto: UserTestCreateDto,
+  ): Promise<HttpResponse<IUserTestResponse>> {
+    const exists: IUserTestResponse | null =
       await this.userRepository.findByUsernameOrEmail(
-        userCreateDto.userName,
-        userCreateDto.email,
+        UserTestCreateDto.userName,
+        UserTestCreateDto.email,
       );
 
     if (exists) throw new ConflictException(entity.alreadyExists);
 
-    userCreateDto.password = await this.bcryptService.hash(
-      userCreateDto.password,
+    UserTestCreateDto.password = await this.bcryptService.hash(
+      UserTestCreateDto.password,
     );
 
-    const user: IUserResponse = await this.userRepository.create(userCreateDto);
+    const user: IUserTestResponse =
+      await this.userRepository.create(UserTestCreateDto);
 
-    return new HttpResponse<IUserResponse>({
+    return new HttpResponse<IUserTestResponse>({
       data: user,
       success: true,
       message: common.success,
@@ -73,14 +76,15 @@ export class UserService {
 
   public async update(
     id: string,
-    userUpdateDto: UserUpdateDto,
+    UserTestUpdateDto: UserTestUpdateDto,
   ): Promise<HttpResponse<ICountResponse>> {
-    let exists: IUserResponse | null = await this.userRepository.findOne(id);
+    let exists: IUserTestResponse | null =
+      await this.userRepository.findOne(id);
 
     if (!exists) throw new NotFoundException(entity.notExists);
 
-    const newUserName: string | undefined = userUpdateDto.userName;
-    const newEmail: string | undefined = userUpdateDto.email;
+    const newUserName: string | undefined = UserTestUpdateDto.userName;
+    const newEmail: string | undefined = UserTestUpdateDto.email;
     if (newUserName || newEmail) {
       exists = await this.userRepository.findByUsernameOrEmail(
         newUserName,
@@ -89,13 +93,13 @@ export class UserService {
       if (exists) throw new ConflictException(entity.alreadyExists);
     }
 
-    const newPassword: string | undefined = userUpdateDto.password;
+    const newPassword: string | undefined = UserTestUpdateDto.password;
     if (newPassword)
-      userUpdateDto.password = await this.bcryptService.hash(newPassword);
+      UserTestUpdateDto.password = await this.bcryptService.hash(newPassword);
 
     const updatedCount: number = await this.userRepository.update(
       id,
-      userUpdateDto,
+      UserTestUpdateDto,
     );
 
     if (!updatedCount) throw new InternalServerErrorException(common.failure);
@@ -108,7 +112,8 @@ export class UserService {
   }
 
   public async delete(id: string): Promise<HttpResponse<ICountResponse>> {
-    const exists: IUserResponse | null = await this.userRepository.findOne(id);
+    const exists: IUserTestResponse | null =
+      await this.userRepository.findOne(id);
 
     if (!exists) throw new NotFoundException(entity.notExists);
 

@@ -1,6 +1,6 @@
 import { UserSignupTypeEnum } from "@app/entity/core-user/enum/user-signup-type.enum";
 import { UserTypeEnum } from "@app/entity/core-user/enum/user-type.enum";
-import { ICoreUser } from "@app/entity/core-user/interface/core-user.interface";
+import { IUser } from "@app/entity/core-user/interface/core-user.interface";
 import { MongoPluginEnum } from "@app/shared/database/mongo/enum/mongo-plugin.enum";
 import { Base } from "@app/shared/database/mongo/schema/base-mongo.schema";
 import { LanguageEnum } from "@app/shared/enum/language.enum";
@@ -22,7 +22,7 @@ const { Types } = mongoose.Schema;
     },
   },
 })
-export class CoreUser extends Base implements ICoreUser {
+export class User extends Base implements IUser {
   @Prop({ type: Types.String, required: true })
   public readonly firstName: string;
 
@@ -112,11 +112,11 @@ export class CoreUser extends Base implements ICoreUser {
   public readonly channelUrl?: string;
 }
 
-export const CoreUserSchema = SchemaFactory.createForClass(CoreUser)
+export const CoreUserSchema = SchemaFactory.createForClass(User)
   .index({ email: 1 }, { unique: true })
   .plugin(require(MongoPluginEnum.AUTO_POPULATE));
 
 export const CoreUserModel: ModelDefinition = {
-  name: CoreUser.name,
+  name: User.name,
   schema: CoreUserSchema,
 };

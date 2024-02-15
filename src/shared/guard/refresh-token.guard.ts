@@ -1,4 +1,4 @@
-import { IUser } from "@app/entity/user/interface/user.interface";
+import { IUserTest } from "@app/entity/user-test/interface/user.interface";
 import { auth } from "@app/shared/constant/response-message.constant";
 import { IJwtPayload } from "@app/shared/jwt/interface/jwt-payload.interface";
 import { JwtCustomService } from "@app/shared/jwt/service/jwt-custom.service";
@@ -29,11 +29,12 @@ export class RefreshTokenGuard implements CanActivate {
     const jwtPayload: IJwtPayload =
       await this.jwtCustomService.verifyRefreshToken(refreshToken);
 
-    const user: IUser = await this.jwtCustomService.validateRefreshTokenPayload(
-      jwtPayload,
-      refreshToken,
-      RefreshTokenGuard.name,
-    );
+    const user: IUserTest =
+      await this.jwtCustomService.validateRefreshTokenPayload(
+        jwtPayload,
+        refreshToken,
+        RefreshTokenGuard.name,
+      );
 
     req.user = user;
 

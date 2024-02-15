@@ -1,6 +1,6 @@
 import { Role } from "@app/entity/role/repository/mongo/role-mongo.schema";
-import { UserStatusEnum } from "@app/entity/user/enum/user-status.enum";
-import { IUser } from "@app/entity/user/interface/user.interface";
+import { UserTestStatusEnum } from "@app/entity/user-test/enum/user-status.enum";
+import { IUserTest } from "@app/entity/user-test/interface/user.interface";
 import { MongoPluginEnum } from "@app/shared/database/mongo/enum/mongo-plugin.enum";
 import { Base } from "@app/shared/database/mongo/schema/base-mongo.schema";
 import { EntityEnum } from "@app/shared/entity/enum/entity.enum";
@@ -24,7 +24,7 @@ const { Types } = mongoose.Schema;
     },
   },
 })
-export class User extends Base implements IUser {
+export class UserTest extends Base implements IUserTest {
   @Prop({ type: Types.String, required: true })
   public readonly fullName!: string;
 
@@ -37,8 +37,12 @@ export class User extends Base implements IUser {
   @Prop({ type: Types.String, required: true })
   public readonly password!: string;
 
-  @Prop({ type: Types.String, required: true, default: UserStatusEnum.ACTIVE })
-  public readonly status!: string;
+  @Prop({
+    type: Types.String,
+    required: true,
+    default: UserTestStatusEnum.ACTIVE,
+  })
+  public readonly status!: UserTestStatusEnum;
 
   @Prop({ type: Types.String, required: true, default: LanguageEnum.ENGLISH })
   public readonly language!: string;
@@ -61,11 +65,11 @@ export class User extends Base implements IUser {
   public readonly lastLogin?: Date;
 }
 
-export const UserSchema = SchemaFactory.createForClass(User)
+export const UserTestSchema = SchemaFactory.createForClass(UserTest)
   .index({ email: 1 }, { unique: true })
   .plugin(require(MongoPluginEnum.AUTO_POPULATE));
 
-export const UserModel: ModelDefinition = {
-  name: User.name,
-  schema: UserSchema,
+export const UserTestModel: ModelDefinition = {
+  name: UserTest.name,
+  schema: UserTestSchema,
 };

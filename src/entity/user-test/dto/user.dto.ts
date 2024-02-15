@@ -1,7 +1,10 @@
 import { IRole } from "@app/entity/role/interface/role.interface";
-import { UserStatusEnum } from "@app/entity/user/enum/user-status.enum";
-import { IUser } from "@app/entity/user/interface/user.interface";
-import { EMAIL_REGEX, USERNAME_REGEX } from "@app/shared/constant/regex.constant";
+import { UserTestStatusEnum } from "@app/entity/user-test/enum/user-status.enum";
+import { IUserTest } from "@app/entity/user-test/interface/user.interface";
+import {
+  EMAIL_REGEX,
+  USERNAME_REGEX,
+} from "@app/shared/constant/regex.constant";
 import { account } from "@app/shared/constant/response-message.constant";
 import { BaseDto } from "@app/shared/entity/dto/base.dto";
 import { LanguageEnum } from "@app/shared/enum/language.enum";
@@ -17,7 +20,7 @@ import {
   Matches,
 } from "class-validator";
 
-export class UserDto extends BaseDto implements IUser {
+export class UserTestDto extends BaseDto implements IUserTest {
   @IsString()
   @IsNotEmpty()
   @ApiProperty({
@@ -65,7 +68,7 @@ export class UserDto extends BaseDto implements IUser {
   })
   public password!: string;
 
-  @IsEnum(UserStatusEnum)
+  @IsEnum(UserTestStatusEnum)
   @IsNotEmpty()
   @ApiProperty({
     description: "Status",
@@ -74,7 +77,7 @@ export class UserDto extends BaseDto implements IUser {
     example: "1",
     default: "1",
   })
-  public status!: UserStatusEnum;
+  public status!: UserTestStatusEnum;
 
   @IsEnum(LanguageEnum)
   @IsNotEmpty()

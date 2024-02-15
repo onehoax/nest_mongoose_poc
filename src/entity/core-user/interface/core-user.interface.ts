@@ -3,7 +3,7 @@ import { UserTypeEnum } from "@app/entity/core-user/enum/user-type.enum";
 import { IBase } from "@app/shared/entity/interface/base.interface";
 import { LanguageEnum } from "@app/shared/enum/language.enum";
 
-export interface ICoreUser extends IBase {
+export interface IUser extends IBase {
   readonly firstName: string;
   readonly secondName: string;
   readonly lastName: string;
