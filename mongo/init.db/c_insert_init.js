@@ -60,7 +60,7 @@ const testRole = db.roles.findOne({
   slug: "test",
 });
 
-db.users.insertMany([
+db.usertests.insertMany([
   {
     fullName: "Super User",
     userName: "super",

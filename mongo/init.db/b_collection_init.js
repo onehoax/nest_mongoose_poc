@@ -14,4 +14,4 @@ db.createCollection("roles");
 
 // ======================= Users ===========================
 
-db.createCollection("users");
+db.createCollection("usertests");
